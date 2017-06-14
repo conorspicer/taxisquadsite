@@ -1,0 +1,37 @@
+{% extends "basic_app/basic_app_base.html" %}
+
+{% block body_block %}
+
+<h1>Rosters</h1>
+
+<div class="container">
+{% with '69ers Spartans DoubleDips Busts Browns Goffs Kakpos Lusts' as list %}
+  {% for i in list.split %}
+
+        {% if forloop.first %}<div class="row">{% endif %}
+
+          <div class="col-xs-3">
+            <h3>{{i}}</h3>
+            {% for school in rosters %}
+
+              {# Add in taxi players #}
+              {% if school.team == i and school.roster == 'Taxi' and school.change == 'In' %}
+                <p><em>{{ school.roster }}</em> <a href="../{{school.id}}/">{{ school.player }}</a></p>
+              {% endif %}
+
+              {# Add in IR players #}
+              {% if school.team == i and school.roster == 'IR' and school.change == 'In' %}
+                <p><em>{{ school.roster }}</em> <a href="../{{school.id}}/">{{ school.player }}</a></p>
+              {% endif %}
+
+            {% endfor %}
+          </div>
+        {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+        {% if forloop.last %}</div>{% endif %}
+  {% endfor %}
+{% endwith %}
+</div>
+
+
+
+{% endblock %}

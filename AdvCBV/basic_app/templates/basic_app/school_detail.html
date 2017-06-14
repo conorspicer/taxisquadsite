@@ -1,0 +1,20 @@
+{% extends "basic_app/basic_app_base.html" %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>Transaction detail page</h1>
+    <p>Team: {{school_detail.team}}</p>
+    <p>Player: {{school_detail.player}}</p>
+    <p>Changed time: {{school_detail.added_time}}</p>
+    <p>Roster to/from: {{school_detail.roster}}</p>
+    <p>Status: {{school_detail.change}}</p>
+
+</div>
+
+<div class="container">
+  <p><a class = "btn btn-success" href="{% url 'basic_app:update' pk=school_detail.pk %}">Update</a>
+    <a class = "btn btn-danger" href="{% url 'basic_app:delete' pk=school_detail.pk %}">Delete</a>
+    <a class = "btn btn-default" href="{% url 'basic_app:list' %}">Cancel</a>
+  </p>
+</div>
+
+{% endblock %}

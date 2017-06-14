@@ -1,0 +1,60 @@
+{% extends "basic_app/basic_app_base.html" %}
+
+{% block body_block %}
+
+<h1>Transaction List </h1>
+
+<div class="jumbotron">
+  <h2>How to use:</h2>
+
+  <ul>
+    <li>To add a player to Taxi or IR squad:</li>
+      <ul>
+        <li>Go to <a href="{% url 'basic_app:create' %}">Add/Remove Player</a> page </li>
+        <li>Enter details, leaving date as default (now)</li>
+      </ul>
+
+      <br>
+
+      <li>To remove a player from Taxi or IR squad:</li>
+        <ul>
+          <li>Find the player on this page and press on their name</li>
+          <li>Update Changed in/out to "out"</li>
+        </ul>
+
+      <br>
+
+      <li><em>Note:</em> If you are re-adding a player, use a new entry so it can be checked whether the 4 week criteria has been met</li>
+      <li> Only use the delete option for errors</li>
+  </ul>
+</div>
+
+  {% if schools %}
+  <div class="container">
+    <table class="table-striped">
+      <thead>
+        <th style="width:12%">Team</th>
+        <th style="width:12%">Player</th>
+        <th style="width:12%">Date of transaction</th>
+        <th style="width:12%">Roster</th>
+        <th style="width:12%">Current Status</th>
+      </thead>
+
+      {% for school in schools %}
+        <tr>
+          <td>{{ school.team }} </td>
+          <td><a href="{{school.id}}/">{{ school.player }}</a></td>
+          <td>{{ school.added_time }}</td>
+          <td>{{ school.roster }}</td>
+          <td>{{ school.change }}</td>
+        </tr>
+      {% endfor %}
+  </table>
+  </div>
+
+
+  {% else %}
+    <p>No Records. Table Not Created.</p>
+  {% endif %}
+
+{% endblock %}
